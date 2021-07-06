@@ -1,82 +1,121 @@
 ---
-layout: base
+layout: default
 ---
 
-{% include header.html type="post" %}
+{% include nav.html %}
 
-<div class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}">
-  <div class="row">
-    <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
+<!-- Blog Detail Start -->
 
-      {% if page.gh-repo %}
-        {% assign gh_split =  page.gh-repo | split:'/'  %}
-        {% assign gh_user =  gh_split[0]  %}
-        {% assign gh_repo =  gh_split[1]  %}
+<section class="blog-detail">
+	<div class="container">
+		<div class="blog-detail-banner wow fadeIn">
+			{% if page.banner_image %}
+				<img src="/assets/images/blog-banner.jpg" alt="{% if page.banner_image_alt %}{{ page.banner_image_alt }}{% else %}{{ page.title }}{% endif %}">
+			{% endif %}
+		</div>
+		<div class="blog-detail-contents wow fadeInUp">
+			<h2>{{page.title}}</h2>
+			<div class="blog-detail-about clearfix">
+				<div class="media pull-left">
+					<div class="media-left">
+						<img src="/assets/images/avatar.jpg" class="media-object" alt="avatar">
+					</div>
+					<div class="media-body">
+						<h4 class="media-heading">{{site.author_name}}</h4>
+						<p>{{ page.date | date: "%B %-d, %Y" }}</p>
+					</div>
+				</div>
+				<div class="blog-detail-category pull-right">
+					{{ page.category }}
+				</div>
+			</div>
+			<div class="blog-detail-content">
+				{{content}}
+			</div>
+			<div class="blog-detail-footer">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="blog-detail-tags">
+							<ul> 
+								{% if page.tags.size > 0 %}
+								Tags: {% for tag in page.tags %}
+								<li>
+									<a class="tags" href="{{ site.baseurl }}/tags/index.html#{{ tag | cgi_escape }}">{{ tag }}</a>
+								</li>
+								{% unless forloop.last %} {% endunless %}{% endfor %}
 
-        <div id="header-gh-btns">
-          {% if page.gh-badge.size > 0 %}
-            {% for badge in page.gh-badge %}
-              {% case badge %}
-                {% when 'star'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=star&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'watch'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=watch&v=2&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'fork'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&repo={{ gh_repo }}&type=fork&count=true" frameborder="0" scrolling="0" width="120px" height="20px"></iframe>
-                {% when 'follow'%}
-                  <iframe src="https://ghbtns.com/github-btn.html?user={{ gh_user }}&type=follow&count=true" frameborder="0" scrolling="0" width="220px" height="20px"></iframe>
-              {% endcase %}
-            {% endfor %}
-          {% endif %}
-        </div>
-      {% endif %}
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="blog-detail-sib">
+					<div class="row">
+						{% if page.previous.url %}
+						<div class="col-md-6">
+							<a href="{{ site.baseurl }}{{page.previous.url}}" class="blog-nav">
+								<span>Previous</span>
+								<p>{{page.previous.title}}</p>
+							</a>
+						</div>
+						{% endif %}
 
-      {% if page.before-content %}
-        <div class="before-content">
-          {% for file in page.before-content %}
-            {% include {{ file }} %}
-          {% endfor %}
-        </div>
-      {% endif %}
+						{% if page.next.url %}
+						<div class="col-md-6">
+							<a href="{{ site.baseurl }}{{page.next.url}}" class="blog-nav">
+								<span>Next</span>
+								<p>{{page.next.title}}</p>
+							</a>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-      <article role="main" class="blog-post">
-        {{ content }}
-      </article>
+<!-- Blog Detail End -->
 
-      {% if page.tags.size > 0 %}
-        <div class="blog-tags">
-          <span>Tags:</span>
-          {% for tag in page.tags %}
-            <a href="{{ '/tags' | relative_url }}#{{- tag -}}">{{- tag -}}</a>
-          {% endfor %}
-        </div>
-      {% endif %}
+<!-- Blog start -->
 
-      {% if page.after-content %}
-        <div class="after-content">
-          {% for file in page.after-content %}
-            {% include {{ file }} %}
-          {% endfor %}
-        </div>
-      {% endif %}
+<section id="blog" class="module module-gray blog">
+	<div class="container">
 
-      {% if page.social-share %}
-        {% include social-share.html %}
-      {% endif %}
+		<div class="module-header">
+			<h2 class="module-title">Recent Blog
+				<span>Articles</span>
+			</h2>
+			<div class="module-line"></div>
+		</div>
 
-      <ul class="pagination blog-pager">
-        {% if page.previous.url %}
-        <li class="page-item previous">
-          <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.previous.title}}">&larr; Previous Post</a>
-        </li>
-        {% endif %}
-        {% if page.next.url %}
-        <li class="page-item next">
-          <a class="page-link" href="{{ page.next.url | relative_url }}" data-toggle="tooltip" data-placement="top" title="{{page.next.title}}">Next Post &rarr;</a>
-        </li>
-        {% endif %}
-      </ul>
-      {% include comments.html %}
-    </div>
-  </div>
-</div>
+		<div class="row">
+
+        	{% for post in site.posts limit:3 %}
+				<div class="col-sm-4">
+					<a href="{{site.baseurl}}{{post.url}}" class="blogList wow fadeInUp">
+						<div class="blogList-img">
+							{% if post.banner_preview %}
+								<img src="{{ "/assets/images/" | append: post.banner_preview | prepend: site.baseurl }}" alt="Blog Desc">
+							{% endif %}
+							{% if post.category %}
+							<span>{{ post.category }}</span>
+							{% endif %}
+						</div>
+						<div class="blogList-desc">
+							<h3>{{ post.title }}</h3>
+							<div>{{ post.description }}</div>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+
+			<div class="col-sm-12">
+				<a class="blog-viewMore" href="/blog.html">VIEW MORE</a>
+			</div>
+
+		</div><!-- .row -->
+	</div><!-- .container -->
+</section>
+
+<!-- Blog end -->
