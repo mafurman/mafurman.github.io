@@ -1062,13 +1062,15 @@ figure {
 
 .side-image {
 	position: absolute;
-	background: url("../images/about.jpg") scroll center no-repeat;
+	background: url("../images/profile_photo_1.jpg") scroll center no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
 	height: 100%;
 }
+
+.circle-image { border-radius: 50%; object-fit: cover; object-position: center; }
 
 .side-image-text {
 	background: #fff;
