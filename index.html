@@ -85,7 +85,7 @@ layout: default
 					<div class="col-sm-4">
 						<a href="{{site.baseurl}}{{post.url}}" class="blogList wow fadeInUp">
 							<div class="blogList-img">
-								{% if post.banner_image %}
+								{% if post.banner_preview %}
 									<img src="{{ "assets/images/" | append: post.banner_preview | prepend: site.baseurl }}" alt="Blog Desc">
 								{% endif %}
 								{% if post.category %}
@@ -226,10 +226,8 @@ layout: default
 				<div class="module-line"></div>
 			</div>
 
-			<div style="position:relative;padding-top:56.25%;">
-				<iframe src="https://drive.google.com/file/d/1IjWAZIqkmL1ZAlTsmmh2mIf52-y2GMMQ/preview" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0"></iframe>
-			</div>
-
+			<iframe class=" lazyloaded" src="https://drive.google.com/file/d/1IjWAZIqkmL1ZAlTsmmh2mIf52-y2GMMQ/preview" width="100%" height="600">
+			</iframe>
 		</div><!-- .container -->
 	</section>
 
@@ -260,20 +258,20 @@ layout: default
 
 				<div class="col-sm-6 col-sm-offset-3">
 
-					<form id="contact-form" action="#">
+					<form id="contact-form" action="https://formspree.io/f/mwkanvgl" method = "POST">
 						<div class="ajax-hidden">
 							<div class="form-group wow fadeInUp">
 								<label class="sr-only" for="c_name">Name</label>
-								<input type="text" id="c_name" class="form-control" name="c_name" placeholder="Name" required>
+								<input type="text" id="c_name" class="form-control" name="Name" placeholder="Name" required>
 							</div>
 
 							<div class="form-group wow fadeInUp" data-wow-delay=".1s">
 								<label class="sr-only" for="c_email">Email address</label>
-								<input type="email" id="c_email" class="form-control" name="c_email" placeholder="E-mail" required>
+								<input type="email" id="c_email" class="form-control" name="Email" placeholder="E-mail" required>
 							</div>
 
 							<div class="form-group wow fadeInUp" data-wow-delay=".2s">
-								<textarea class="form-control" id="c_message" name="c_message" rows="7" placeholder="Your message" required></textarea>
+								<textarea class="form-control" id="c_message" name="Message" rows="7" placeholder="Your message" required></textarea>
 							</div>
 
 							<button type="submit" class="btn btn-block btn-custom-2 wow fadeInUp" data-wow-delay=".3s">Send Message
