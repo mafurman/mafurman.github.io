@@ -2,7 +2,7 @@
 layout: post
 title:  "Can you really implement a thread safe cache with no locks?"
 description: "How our team implemented an event-based least recently used (LRU) cache that doesn't require any explicit locks."
-date:   2021-09-21
+date:   2019-09-21
 banner_preview: cache-post/solving-a-problem-with-multi-threading-you-now-two-problems-have.jpg
 banner_image: cache-post/solving-a-problem-with-multi-threading-you-now-two-problems-have.jpg
 category: Coding
