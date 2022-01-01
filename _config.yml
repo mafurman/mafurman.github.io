@@ -13,7 +13,7 @@ description: "A portfolio showcasing my work in software engineering, UI/UX desi
 
 
 # The subpath of your site, e.g. /blog, for generating urls
-baseurl: 
+baseurl: ""
 
 sass:
   sass_dir: _sass
